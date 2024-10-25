@@ -1,0 +1,159 @@
+---
+title: "Worksheet 1 in R"
+author: "Erl Syron R. Espadon"
+output: pdf_document
+---
+
+# 1. Set up a vector named age
+```{r}
+age <- c(34, 28, 22, 36, 27, 18, 52, 39, 42, 29,
+         35, 31, 27, 22, 37, 34, 19, 20, 57, 49,
+         50, 37, 46, 25, 17, 37, 42, 53, 41, 51,
+         35, 24, 33, 41)
+```
+
+# a. How many data points?
+```{r}
+length(age)
+```
+  
+# 2. Find the reciprocal of the values for age
+```{r}
+reciprocalage <- 1 / age
+reciprocalage 
+```
+ 
+
+# 3. Assign new_age
+```{r}
+newage <- c(age, 0, age)
+newage  
+```
+
+
+# 4. Sort the values for age
+```{r}
+sortedage <- sort(age)
+sortedage
+```
+
+
+# 5. Find the minimum and maximum value for age
+```{r}
+minage <- min(age)
+maxage <- max(age)
+minage
+maxage 
+```
+ 
+
+# 6. Set up a vector named data
+```{r}
+data <- c(2.4, 2.8, 2.1, 2.5, 2.4, 2.2, 2.5, 2.3, 2.5, 2.3, 2.4, 2.7)
+```
+
+
+# a. How many data points?
+```{r}
+length(data)
+```
+  
+
+# 7. Generates a new vector for data where you double every value
+```{r}
+doubleddata <- data * 2
+doubleddata 
+```
+ 
+
+# 8. Generate sequences
+```{r}
+seq1to100 <- seq(1, 100)
+seq20to60 <- seq(20, 60)  
+mean20to60 <- mean(seq(20, 60))  
+sum51to91 <- sum(seq(51, 91))  
+seq1to1000 <- seq(1, 1000) 
+```
+
+
+# a. How many data points?
+```{r}
+length(seq1to100)  
+length(seq20to60)  
+length(mean20to60) 
+length(sum51to91)
+```
+    
+
+# b. Output of sequences
+```{r}
+seq1to100
+seq20to60 
+mean20to60  
+sum51to91 
+```
+
+
+
+#c. 8.5 Maximum data points until 10
+```{r}
+seq1to1000max10 <- seq(1, 10)
+seq1to1000max10
+```
+  
+
+# 9. Print a vector with integers not divisible by 3, 5, or 7
+```{r}
+notdivisible <- Filter(function(i) { all(i %% c(3, 5, 7) != 0) }, seq(1, 100))
+notdivisible 
+```
+
+# 10. Generate a sequence backwards of the integers from 1 to 100
+```{r}
+backwardseq <- seq(100, 1)
+backwardseq
+```
+  
+# 11. List multiples of 3 or 5 below 25 and find the sum
+```{r}
+multiples3or5 <- Filter(function(x) x %% 3 == 0 | x %% 5 == 0, seq(1, 24))
+summultiples <- sum(multiples3or5)
+multiples3or5  
+summultiples
+```
+    
+
+# a. How many data points?
+```{r}
+length(multiples3or5)
+```
+  
+
+# 12. Enter the statement and describe the output
+# x <- {0 + x + 5 + } 
+# Output: An error occurs because x is not defined.
+
+# 13. Set up a vector named score
+```{r}
+score <- c(72, 86, 92, 63, 88, 89, 91, 92, 75, 75, 77)
+x2 <- score[2] 
+x3 <- score[3]  
+x2
+x3
+```
+
+
+# 14. Create a vector with NA
+```{r}
+a <- c(1, 2, NA, 4, NA, 6, 7)
+# a. Change NA to 999
+print(a, na.print="-999")
+```
+
+# 15. Special function call
+```{r}
+name <- readline(prompt="Input your name: ")
+age <- readline(prompt="Input your age: ")
+print(paste("My name is", name, "and I am", age, "years old."))
+print(R.version.string)  # Output: "R version 4.4.1 (2024-06-14 ucrt)"
+```
