@@ -1,0 +1,189 @@
+---
+title: "Worksheet 2 in R"
+author: "Erl Syron R. Espadon"
+output: html_document
+---
+
+#vector using operator
+
+# a. Sequence from -5 to 5
+```{r}
+seq_vector <- -5:5
+seq_vector
+```
+
+# b. x <- 1:7, the value of x
+```{r}
+x <- 1:7
+x
+```
+
+# 2. Creating a vector using seq() function
+
+# a. Sequence from 1 to 3 with a step size of 0.2
+```{r}
+seq_vector_2 <- seq(1, 3, by=0.2) 
+seq_vector_2
+```
+
+# 3. Worker ages vector and accessing specific elements
+```{r}
+ages <- c(34, 28, 22, 36, 27, 18, 52, 39, 42, 29, 35, 31, 27, 22, 37, 34, 19, 20, 57, 
+          49, 50, 37, 46, 25, 17, 37, 43, 53, 41, 51, 35, 24, 33, 41, 53, 40, 18, 44, 
+          38, 41, 48, 27, 39, 19, 30, 61, 54, 58, 26, 18)
+```
+
+# a. Access the 3rd element
+```{r}
+ages[3]  
+```
+
+# b. Access the 2nd and 4th elements
+```{r}
+ages[c(2, 4)] 
+```
+
+# c. Access all but the 4th and 12th elements
+```{r}
+ages[-c(4, 12)]
+```
+
+# 4. Named vector x
+```{r}
+x <- c("first" = 3, "second" = 0, "third" = 9)
+names(x)
+x[c("first", "third")]
+```
+
+# 5. Sequence from -3:2 and modifying the second element
+```{r}
+x_seq <- -3:2
+x_seq[2] <- 0
+x_seq
+```
+
+#6.fuel purchase
+```{r}
+month <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun")
+price_per_liter <- c(52.50, 57.25, 60.00, 65.00, 74.25, 54.00)
+purchase_quantity <- c(25, 30, 40, 50, 10, 45)
+```
+
+# a. Create the data frame
+```{r}
+fuel_data <- data.frame(month, price_per_liter, purchase_quantity)
+fuel_data
+```
+
+# b. Calculate the weighted mean
+```{r}
+weighted.mean(price_per_liter, purchase_quantity)
+```
+
+#7.Working with built-in datasets (rivers dataset)
+
+#a. Create a vector with specific statistical values for the rivers dataset
+```{r}
+data <- c(length(rivers), sum(rivers), mean(rivers), median(rivers), var(rivers), 
+          sd(rivers), min(rivers), max(rivers))
+data
+```
+
+#8. Working with Forbes celebrity rankings
+
+#a. Create vectors according to the table in the worksheet
+```{r}
+names <- c("Oprah Winfrey", "Tiger Woods", "Angelina Jolie", "Beyonce Knowles", "David Beckham", 
+           "J.K. Rowling", "Brad Pitt", "Johnny Depp", "Jay-Z", "Kobe Bryant")
+ranking <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+pay <- c(275, 105, 20, 87, 40, 300, 31, 92, 63, 45)
+data <- data.frame(names, ranking, pay)
+data
+```
+
+#b. Modify the power ranking and pay of J.K. Rowling (assuming it is the 2nd entry)
+```{r}
+data$ranking[2] <- 15
+data$pay[2] <- 90
+data
+```
+
+#c. Save the table as a CSV file
+```{r}
+write.csv(data, "PowerRanking.csv")
+```
+
+#d. Import the CSV and access rows 10 to 20
+```{r}
+data <- read.csv("PowerRanking.csv")
+subset_data <- data[10:20, ]
+save(subset_data, file = "Ranks.RData")
+```
+
+
+#9. Working with an Excel file (Hotels-Vienna)
+
+#a. Import the Excel file into RStudio
+```{r}
+library(readxl)
+hotels_data <- read_excel("C:\\Users\\Acer\\Downloads\\hotels-vienna.xlsx")
+```
+
+#b. How many dimensions does the dataset have?
+```{r}
+dim(hotels_data)
+```
+
+#Select specific columns:
+```{r}
+selected_hotels <- hotels_data[, c("country", "neighbourhood", "price", "stars", "accommodation_type", "rating")]  
+print(selected_hotels)
+```
+
+#d. Save the data as new.RData:
+```{r}
+save(selected_hotels, file = "new.RData")
+```
+
+#e. Display the first and last 6 rows of new.RData:
+```{r}
+print(head(selected_hotels))
+print(tail(selected_hotels))
+```
+
+#10. Working with lists of vegetables:
+
+#a. Create a list of 10 vegetables:
+```{r}
+vegetables <- c("Carrot", "Broccoli", "Spinach", "Tomato", "Cucumber", "Pepper", "Onion", "Garlic", "Potato", "Lettuce")
+print(vegetables)
+```
+
+# b. Add 2 more vegetables
+```{r}
+vegetables <- c(vegetables, "Pumpkin", "Zucchini")
+print(vegetables)
+```
+
+# c. Add 4 more vegetables after the 5th index
+```{r}
+vegetables <- append(vegetables, c("Eggplant", "Radish", "Mushroom", "Beetroot"), after = 5)
+print(vegetables)
+```
+
+# How many vegetables?
+```{r}
+print(length(vegetables))
+```
+
+
+# d. Remove vegetables at indices 5, 10, and 15
+```{r}
+vegetables <- vegetables[-c(5, 10, 15)]
+print(vegetables)
+```
+
+# How many vegetables left?
+```{r}
+print(length(vegetables)) 
+```
