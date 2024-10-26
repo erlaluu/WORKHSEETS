@@ -1,0 +1,6 @@
+---
+title: "Worksheet 3b in R"
+author: "Erl Syron R. Espadon"
+output: pdf_document
+---
+
