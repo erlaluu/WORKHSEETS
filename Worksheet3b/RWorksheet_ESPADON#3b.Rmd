@@ -4,3 +4,4 @@ author: "Erl Syron R. Espadon"
 output: pdf_document
 ---
 
+label <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun")
