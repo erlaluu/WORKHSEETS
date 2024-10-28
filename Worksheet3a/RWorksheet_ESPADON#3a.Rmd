@@ -4,3 +4,155 @@ author: "Erl Syron R. Espadon"
 output: pdf_document
 ---
 
+```{r}
+LETTERS
+```
+
+#1. VECTORS
+
+#a. Produce a vector that contains the first 11 letters.
+```{r}
+first_11_letters <- LETTERS[1:11]
+first_11_letters
+
+```
+#b. Produce a vector that contains the odd-numbered letters.
+```{r}
+odd_letters <- LETTERS[seq(1, length(LETTERS), by=2)]
+odd_letters
+
+```
+#c. Produce a vector that contains the vowels.
+```{r}
+vowels <- LETTERS[c(1, 5, 9, 15, 21)]
+vowels
+
+```
+#d. Produce a vector that contains the last 5 lowercase letters.
+```{r}
+last_5_lowercase <- letters[22:26]
+last_5_lowercase
+
+```
+#e. Produce a vector that contains letters between 15 to 24 in lowercase.
+```{r}
+mid_lowercase <- letters[15:24]
+mid_lowercase
+
+```
+
+#2. Create a vector with the average temperatures in April for Tuguegarao City, Manila, Iloilo City, Tacloban, Samal Island, and Davao City.
+#a. Character vector for the cities.
+```{r}
+city <- c("Tuguegarao City", "Manila", "Iloilo City", "Tacloban", "Samal Island", "Davao City")
+city
+
+```
+#b. Temperature vector.
+```{r}
+temp <- c(42, 39, 34, 34, 30, 27)
+temp
+
+```
+#c. Combine the city and temp vectors into a dataframe.
+```{r}
+weather_df <- data.frame(City = city, Temperature = temp)
+weather_df
+
+```
+#d. Rename the columns using names() function.
+```{r}
+names(weather_df) <- c("City", "Temperature")
+weather_df
+
+```
+#e. Print the structure using str() function.
+```{r}
+str(weather_df)
+
+```
+#f. Content of row 3 and row 4.
+```{r}
+row_3_4 <- weather_df[3:4, ]
+row_3_4
+
+```
+#g. Display the city with the highest and lowest temperature.
+```{r}
+highest_temp <- weather_df[which.max(weather_df$Temperature), ]
+lowest_temp <- weather_df[which.min(weather_df$Temperature), ]
+highest_temp
+lowest_temp
+
+```
+
+#MATRICES
+#1. a. Create a matrix of numbers one to eight and eleven to fourteen with four columns and three rows.
+```{r}
+matrix1 <- matrix(c(1:8, 11:14), ncol = 4, byrow = TRUE)
+matrix1
+
+```
+#b. Multiply the matrix by two.
+```{r}
+matrix_multiplied <- matrix1 * 2
+matrix_multiplied
+
+```
+#wc. Content of row 2.
+```{r}
+row_2 <- matrix1[2, ]
+row_2
+
+```
+#d. Display columns 3 and 4 in rows 1 and 2.
+```{r}
+cols_3_4_rows_1_2 <- matrix1[1:2, 3:4]
+cols_3_4_rows_1_2
+
+```
+#e. Display only columns 2 and 3, row 3.
+```{r}
+cols_2_3_row_3 <- matrix1[3, 2:3]
+cols_2_3_row_3
+
+```
+#f. Display only column 4.
+```{r}
+col_4 <- matrix1[, 4]
+col_4
+
+```
+#g. Name the rows and columns.
+```{r}
+dimnames(matrix_multiplied) <- list(c("isa", "dalawa", "tatlo"), c("uno", "dos", "tres", "quatro"))
+matrix_multiplied
+
+```
+#h. Reshape the matrix using dim().
+```{r}
+dim(matrix1) <- c(6, 2)
+matrix1
+
+```
+
+#ARRAYS
+#a.Create an array with the specified numeric values, repeated twice, and a three-dimensional array with 4 columns and 2 rows.
+```{r}
+values <- c(1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1)
+array_data <- array(rep(values, each = 2), dim = c(2, 4, 3))
+array_data
+
+```
+#b. Dimensions of the array.
+```{r}
+dim(array_data)
+
+```
+#c. Name the rows and columns.
+```{r}
+dimnames(array_data) <- list(letters[1:2], LETTERS[1:4], c("1st-Dimensional Array", "2nd-Dimensional Array", "3rd-Dimensional Array"))
+array_data
+
+```
+
