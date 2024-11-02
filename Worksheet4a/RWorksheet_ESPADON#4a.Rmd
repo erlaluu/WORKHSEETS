@@ -4,3 +4,188 @@ author: "Erl Syron R. Espadon"
 output: pdf_document
 ---
 
+
+
+#1. The table below shows the data about shoe size and height. Create a data frame.
+#a.	Describe the data.
+```{r}
+# Create a data frame from the table
+df <- data.frame(
+  Shoe_size = c(6.5, 9.0, 8.5, 8.5, 10.5, 7.0, 9.5, 9.0, 13.0, 7.5, 10.5, 8.5, 12.0, 10.5, 13.0, 11.5, 8.5, 5.0, 10.0, 6.5, 7.5, 8.5, 10.5, 8.5, 10.5, 11.0, 9.0, 13.0),
+  Height = c(66.0, 68.0, 64.5, 65.0, 70.0, 64.0, 70.0, 71.0, 72.0, 64.0, 74.5, 67.0, 71.0, 71.0, 77.0, 72.0, 59.0, 62.0, 72.0, 66.0, 64.0, 67.0, 73.0, 69.0, 72.0, 70.0, 69.0, 70.0),
+  Gender = c("F", "F", "F", "F", "M", "F", "F", "F", "M", "F", "M", "F", "M", "M", "M", "M", "F", "F", "M", "F", "F", "M", "M", "F", "M", "M", "M", "M")
+)
+
+# Print the data frame
+print(df)
+```
+
+#b.	Create a subset by males and females with their corresponding shoe size and height.What its result? Show the R scripts.
+```{r}
+# Create subsets for males and females
+males <- df[df$Gender == "M", c("Shoe_size", "Height")]
+females <- df[df$Gender == "F", c("Shoe_size", "Height")]
+
+# Print the subsets
+print(males)
+print(females)
+```
+
+#c.	Find the mean of shoe size and height of the respondents. Write the R scripts and its result.
+```{r}
+# Calculate the mean of shoe size and height
+mean_shoe_size <- mean(df$Shoe_size)
+mean_height <- mean(df$Height)
+
+# Print the means
+print(paste("Mean shoe size:", mean_shoe_size))
+print(paste("Mean height:", mean_height))
+```
+
+#d.	Is there a relationship between shoe size and height? Why?
+```{r}
+#
+```
+
+
+
+#2.	Construct character vector months to a factor with factor() and assign the result to factor_months_vector. Print out factor_months_vector and assert that R prints out the factor levels below the actual values.
+```{r}
+months <- c("March", "April", "January", "November", "January",
+            "September", "October", "September", "November", "August",
+            "January", "November", "November", "February", "May", "August",
+            "July", "December", "August", "August", "September", "November", 
+            "February", "April")
+factor_months_vector <- factor(months)
+print(factor_months_vector)
+```
+
+
+#3.	Then check the summary() of the months_vector and factor_months_vector. | Interpret the results of both vectors. Are they both equally useful in this case?
+```{r}
+summary(months)
+summary(factor_months_vector)
+
+#In this case, factor_months_vector is more useful than months_vector. The summary of the factor vector provides valuable information about the distribution of the months, while the summary of the character vector only provides basic information about the vector itself.
+```
+
+
+#4.	Create a vector and factor for the table below.
+```{r}
+direction_vector <- c("East", "West", "West", "West", "West", "North", "North", "North")
+factor_data <- factor(direction_vector)
+new_order_data <- factor(factor_data, levels = c("East", "West", "North"))
+print(new_order_data)
+```
+
+
+#5
+#a. a.	Import the excel file into the Environment Pane using read.table() function.Write the code
+```{r}
+march_data <- read.table("import_march.csv", header = TRUE, sep = ",")
+```
+#b. View the dataset. Write the R scripts and its result.
+```{r}
+print(march_data)
+```
+
+
+
+#6. Full Search (Exhaustive Search Function)
+# Get user input
+```{r}
+exhaustive_search <- function(number) {
+  if (number < 1 || number > 50) {
+    return("The number selected is beyond the range of 1 to 50")
+  } else if (number == 20) {
+    return(TRUE)
+  } else {
+    return(number)
+  }
+}
+
+# Get user input
+user_number <- readline("Enter a number between 1 and 50: ")
+
+# Check if the input is a valid number
+if (is.numeric(user_number)) {
+  user_number <- as.numeric(user_number)
+  # Call the function and display the result
+  result <- exhaustive_search(user_number)
+  print(result)
+} else {
+  print("Invalid input. Please enter a number.")
+}
+```
+
+
+#7. Change (Minimum Bills Function)
+```{r}
+min_bills <- function(price) {
+  bill_values <- c(1000, 500, 200, 100, 50)
+  bills_needed <- rep(0, length(bill_values))
+  
+  for (i in 1:length(bill_values)) {
+    while (price >= bill_values[i]) {
+      bills_needed[i] <- bills_needed[i] + 1
+      price <- price - bill_values[i]
+    }
+  }
+  
+  return(sum(bills_needed))
+}
+
+# Get a random price divisible by 50
+price <- sample(seq(50, 1000, by = 50), 1)
+
+# Call the function and display the result
+num_bills <- min_bills(price)
+print(paste("Minimum bills needed:", num_bills))
+```
+
+
+#8.
+#a. Create a dataframe from the above table. Write the R codes and its output.
+```{r}
+# Create the dataframe
+grades <- data.frame(
+  Name = c("Annie", "Thea", "Steve", "Hanna"),
+  Grade1 = c(85, 65, 75, 95),
+  Grade2 = c(65, 75, 55, 75),
+  Grade3 = c(85, 90, 80, 100),
+  Grade4 = c(100, 90, 85, 90)
+)
+
+# Print the dataframe
+print(grades)
+```
+#b. Without using the rowMean function, output the average score of students whose average math score over 90 points during the semester. write R code and its output.
+```{r}
+for (i in 1:nrow(grades)) {
+  student_name <- grades$Name[i]
+  average_score <- (grades$Grade1[i] + grades$Grade2[i] + grades$Grade3[i] + grades$Grade4[i]) / 4
+  if (average_score > 90) {
+    print(paste(student_name, "'s average grade this semester is", round(average_score, 2)))
+  }
+}
+```
+#c. Without using the mean function, output as follows for the tests in which the average score was less than 80 out of 4 tests.
+```{r}
+for (j in 2:ncol(grades)) {  # Start from column 2 (Grade1) to avoid the Name column
+  test_average <- mean(grades[, j])
+  if (test_average < 80) {
+    print(paste("The", j - 1, "th test was difficult."))  # Adjust the test number
+  }
+}
+```
+#d. Without using the max function, output as follows for students whose highest score for a semester exceeds 90 points.
+```{r}
+for (i in 1:nrow(grades)) {
+  student_name <- grades$Name[i]
+  highest_score <- max(grades[i, 2:5])
+  if (highest_score > 90) {
+    print(paste(student_name, "'s highest grade this semester is", highest_score))
+  }
+}
+```
+
