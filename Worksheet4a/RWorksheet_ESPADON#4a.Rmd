@@ -18,6 +18,11 @@ shoes <- data.frame(
 
 # Print the data frame
 print(shoes)
+
+library(writexl) 
+
+#excel file
+write_xlsx(shoes, "C:\\WORKSHEETS\\Worksheet4a\\shoes.xlsx")
 ```
 
 #b.	Create a subset by males and females with their corresponding shoe size and height.What its result? Show the R scripts.
@@ -41,7 +46,6 @@ mean_height <- mean(shoes$Height)
 print(paste("Mean shoe size:", mean_shoe_size))
 print(paste("Mean height:", mean_height))
 ```
-
 #d.	Is there a relationship between shoe size and height? Why?
 ```{r}
 #the taller, the bigger the shoe size.
