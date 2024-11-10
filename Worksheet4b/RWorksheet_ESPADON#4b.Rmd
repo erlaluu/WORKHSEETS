@@ -4,3 +4,75 @@ author: "Erl Syron R. Espadon"
 output: pdf_document
 ---
 
+#Using Loop Function: for() loop
+#1.	Using the for loop, create an R script that will display a 5x5 matrix as shown in Figure 1. It must contain vectorA = [1,2,3,4,5] and a 5 x 5 zero matrix. Hint: Use abs() function to get the absolute value
+```{r}
+# Create vectorA
+vectorA <- c(1, 2, 3, 4, 5)
+
+# Create a 5x5 zero matrix
+matrix <- matrix(0, nrow = 5, ncol = 5)
+
+# Use for loop to populate the matrix
+for (i in 1:5) {
+  for (j in 1:5) {
+    matrix[i, j] <- abs(vectorA[i] - vectorA[j])
+  }
+}
+print(matrix)
+```
+
+
+#2.	Print the string "*" using for() function. 
+```{r}
+# Loop for each row
+for (i in 1:5) {
+  for (j in 1:i) {
+    cat("* ")
+  }
+  cat("\n")
+}
+```
+
+
+#3.	Get an input from the user to print the Fibonacci sequence starting from the 1st input up to 500. Use repeat and break statements. Write the R Scripts and its output.
+```{r fibonacci}
+# Define a function to generate the Fibonacci sequence
+fibonacci_sequence <- function(start_num) {
+  # Initialize variables for the Fibonacci sequence
+  a <- 0
+  b <- start_num
+
+  # Use repeat and break statements to generate the sequence
+  repeat {
+    # Print the current number
+    cat(a, " ")
+
+    # Calculate the next number in the sequence
+    c <- a + b
+
+    # Update the variables for the next iteration
+    a <- b
+    b <- c
+
+    # Break the loop if the current number exceeds 500
+    if (c > 500) {
+      break
+    }
+  }
+}
+
+# Get user input for the starting number
+start_num <- as.numeric(readline("Enter the starting number for the Fibonacci sequence: "))
+
+
+# Call the function to generate the sequence
+fibonacci_sequence(start_num)
+```
+
+
+#4. Import the dataset as shown in Figure 1 you have created previously.
+```{r}
+View(df)
+```
+
