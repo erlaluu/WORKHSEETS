@@ -37,27 +37,31 @@ for (i in 1:5) {
 
 #3.	Get an input from the user to print the Fibonacci sequence starting from the 1st input up to 500. Use repeat and break statements. Write the R Scripts and its output.
 ```{r fibonacci}
-# Define a function to generate the Fibonacci sequence
+# Function to generate the Fibonacci sequence
 fibonacci_sequence <- function(start_num) {
-  # Initialize variables for the Fibonacci sequence
+  # Initialize the sequence with the starting number
   a <- 0
-  b <- start_num
+  b <- 1
+  c <- start_num  # Initialize 'c' to the starting number
 
-  # Use repeat and break statements to generate the sequence
-  repeat {
-    # Print the current number
-    cat(a, " ")
+  # Print the starting number
+  cat(c, " ")
 
-    # Calculate the next number in the sequence
+  # Loop to generate the sequence
+  while (TRUE) {  # Loop indefinitely until break condition is met
+    # Calculate the next Fibonacci number
     c <- a + b
 
-    # Update the variables for the next iteration
-    a <- b
-    b <- c
+    # Update the sequence variables (important order!)
+    a <- b  # Update 'a' first
+    b <- c  # Then update 'b'
+
+    # Print the current Fibonacci number
+    cat(c, " ")
 
     # Break the loop if the current number exceeds 500
-    if (c > 500) {
-      break
+    if (c >= 500) {  # Check before printing the next number
+      break  # Exit the loop
     }
   }
 }
@@ -65,14 +69,191 @@ fibonacci_sequence <- function(start_num) {
 # Get user input for the starting number
 start_num <- as.numeric(readline("Enter the starting number for the Fibonacci sequence: "))
 
-
 # Call the function to generate the sequence
 fibonacci_sequence(start_num)
 ```
 
 
+
+
 #4. Import the dataset as shown in Figure 1 you have created previously.
+#a.	What is the R script for importing an excel or a csv file? Display the first 6 rows of the dataset? Show your codes and its result
 ```{r}
-View(df)
+library(readxl)
+shoes <- read_excel("C:\\WORKSHEETS\\Worksheet4a\\shoes.xlsx")
+
+head(shoes)
+```
+#b.Create a subset for gender(female and male). How many observations are there in Male? How about in Female? Write the R scripts and its output.
+```{r}
+female_shoes <- shoes[shoes$Gender == "F", ]
+male_shoes <- shoes[shoes$Gender == "M", ]
+
+num_females <- nrow(female_shoes)
+num_males <- nrow(male_shoes)
+
+cat("Number of females:", num_females, "\n")
+cat("Number of males:", num_males)
+```
+#c.	Create a graph for the number of males and females for Household Data. Use plot(),chart type = barplot. Make sure to place title, legends, and colors. Write the R scripts and its result.
+```{r}
+barplot(c(num_males, num_females), 
+        names.arg = c("Male", "Female"),
+        main = "Shoe Data", 
+        ylab = "Number of Individuals",
+        col = c("red", "yellow"),
+        legend.text = c("Male", "Female"),
+        args.legend = list(x = "bottomright")) 
+```
+
+
+#5. The monthly income of Dela Cruz family was spent on the following:Food- 60	Electricity-10	Savings-5	Miscellaneous-25
+#.a. Create a piechart that will include labels in percentage.Add some colors and title of the chart. Write the R scripts and show its output.
+```{r}
+# data frame
+expenses <- data.frame(
+  Category = c("Food", "Electricity", "Savings", "Miscellaneous"),
+  Amount = c(60, 10, 5, 25)
+)
+
+# Calculate percentages
+expenses$Percentage <- round(expenses$Amount / sum(expenses$Amount) * 100, 2)
+
+# pie chart
+pie(expenses$Amount, 
+    labels = paste(expenses$Category, "(", expenses$Percentage, "%)"),
+    main = "Dela Cruz Family Monthly Expenses",
+    col = c("red", "blue", "yellow", "green"))
+
+#legend
+legend("topright", legend = expenses$Category, fill = c("red", "blue", "yellow", "green"))
+```
+
+
+
+#6. Use the iris dataset.
+```{r}
+data(iris)
+```
+#a.	Check for the structure of the dataset using the str() function. Describe what you have seen in the output.
+```{r}
+str(iris)
+```
+#b.	Create an R object that will contain the mean of the sepal.length, sepal.width,petal.length,and petal.width. What is the R script and its result?
+```{r}
+means <- c(mean(iris$Sepal.Length), 
+           mean(iris$Sepal.Width),
+           mean(iris$Petal.Length),
+           mean(iris$Petal.Width))
+
+names(means) <- c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")
+
+print(means)
+```
+#c.	Create a pie chart for the Species distribution. Add title, legends, and colors. Write the R script and its result.
+```{r}
+species_counts <- table(iris$Species)
+
+pie(species_counts, 
+    labels = paste(names(species_counts), "(", round(species_counts / sum(species_counts) * 100, 2), "%)"),
+    main = "Iris Species Distribution",
+    col = c("blue", "cyan", "pink"))
+
+legend("topright", legend = names(species_counts), fill = c("blue", "cyan", "pink"))
+```
+#d.	Subset the species into setosa, versicolor, and virginica. Write the R scripts and show the last six (6) rows of each species.
+```{r}
+setosa <- iris[iris$Species == "setosa", ]
+versicolor <- iris[iris$Species == "versicolor", ]
+virginica <- iris[iris$Species == "virginica", ]
+
+tail(setosa, 6)
+tail(versicolor, 6)
+tail(virginica, 6) 
+```
+#e. Scatterplot with Species Differentiation
+```{r}
+iris$Species <- as.factor(iris$Species)
+plot(iris$Sepal.Length, iris$Sepal.Width, 
+     main = "Iris Dataset", 
+     sub = "Sepal Width and Length",
+     xlab = "Sepal Length (cm)",
+     ylab = "Sepal Width (cm)",
+     pch = as.numeric(iris$Species),
+     col = c("blue", "purple", "red")[iris$Species])
+
+legend("topright", legend = levels(iris$Species), 
+       pch = 1:3, col = c("blue", "purple", "red")) 
+```
+#f. Interpret the result.
+```{r}
+"Species Distribution: The pie chart shows that the three species are roughly equally distributed in the dataset.
+Sepal Length and Width: The scatterplot reveals some trends:
+Setosa: Setosa species tend to have smaller sepal lengths and widths compared to the other two species.
+Versicolor: Versicolor species fall in the middle range for both sepal length and width.
+Virginica: Virginica species generally have the largest sepal lengths and widths."
+
+```
+
+
+
+
+#7. Import the alexa-file.xlsx. Check on the variations. Notice that there are extra whitespaces among black variants (Black Dot, Black Plus, Black Show, Black Spot). Also on the white variants (White Dot, White Plus, White Show, White Spot).
+```{r}
+library(readxl)
+alexa_file <- read_excel("C:/Users/Acer/Downloads/alexa_file.xlsx")
+View(alexa_file)
+```
+#a.	Rename the white and black variants by using gsub() function.
+```{r}
+# Rename white variants
+alexa_file$variation <- gsub("White Dot", "White_Dot", alexa_file$variation)
+alexa_file$variation <- gsub("White Plus", "White_Plus", alexa_file$variation)
+alexa_file$variation <- gsub("White Show", "White_Show", alexa_file$variation)
+alexa_file$variation <- gsub("White Spot", "White_Spot", alexa_file$variation)
+
+# Rename black variants
+alexa_file$variation <- gsub("Black Dot", "Black_Dot", alexa_file$variation)
+alexa_file$variation <- gsub("Black Plus", "Black_Plus", alexa_file$variation)
+alexa_file$variation <- gsub("Black Show", "Black_Show", alexa_file$variation)
+alexa_file$variation <- gsub("Black Spot", "Black_Spot", alexa_file$variation)
+
+# Example output (snippet)
+head(alexa_file)
+```
+#b.	Get the total number of each variations and save it into another object. Save the object as variations.RData. Write the R scripts. What is its result?
+```{r}
+library(dplyr)
+
+variations <- alexa_file %>% 
+  count(variation)
+
+save(variations, file = "variations.RData")
+```
+#c.	From the variations.RData, create a barplot(). Complete the details of the chart which include the title, color, labels of each bar.
+```{r}
+load("variations.RData")
+
+barplot(variations$n, 
+        names.arg = variations$variation,
+        main = "Alexa Variation",
+        ylab = "Number of Variations",
+        col = rainbow(length(variations$variation)))
+```
+#d.	Create a barplot() for the black and white variations. Plot it in 1 frame, side by side. Complete the details of the chart.
+```{r}
+# Separate black and white variations
+black_variations <- variations[grep("Black", variations$variation), ]
+white_variations <- variations[grep("White", variations$variation), ]
+
+# Plot side by side
+barplot(cbind(black_variations$n, white_variations$n), 
+        beside = TRUE,
+        names.arg = c(black_variations$variation, white_variations$variation),
+        main = "Black vs. White Alexa Variations",
+        ylab = "Number of Variations",
+        col = c("black", "white"),
+        legend.text = c("Black", "White"),
+        args.legend = list(x = "topright")) 
 ```
 
